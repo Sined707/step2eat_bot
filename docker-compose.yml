@@ -1,0 +1,21 @@
+name: step2eat-telegram-bot
+
+services:
+  telegram-bot:
+    build: .
+    restart: unless-stopped
+    init: true
+    environment:
+      BOT_TOKEN: ${BOT_TOKEN}
+      MINI_APP_URL: ${MINI_APP_URL}
+    networks:
+      - isolated
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+networks:
+  isolated:
+    driver: bridge
